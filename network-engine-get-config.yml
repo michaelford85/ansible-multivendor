@@ -9,17 +9,25 @@
 
   tasks:
 
-  - name: Retrieve network element configuration
-    include_role:
-      public: yes
-      name: ansible-network.config_manager
-      tasks_from: get
+  - block:
+    - name: Retrieve network element configuration
+      include_role:
+        public: yes
+        name: ansible-network.config_manager
+        tasks_from: get
 
-  - name: print out configuration
-    debug:
-      var: configuration
+    - name: print out configuration
+      debug:
+        var: configuration
 
-  - name: Place configurations into file
-    copy:
-      dest: "./configs/{{ inventory_hostname }}.cfg"
-      content: "{{ configuration }}"
+    - name: Place configurations into file
+      copy:
+        dest: "./configs/{{ inventory_hostname }}.cfg"
+        content: "{{ configuration }}"
+    when: not erase
+
+  - name: Delete configuration files
+    file:
+      path: "./configs/{{ inventory_hostname }}.cfg"
+      state: absent
+    when: erase
