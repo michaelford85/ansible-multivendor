@@ -1,0 +1,20 @@
+---
+
+- name: Apply or remove standard router template with config_manager
+  hosts: all
+  connection: network_cli
+  gather_facts: no
+  vars:
+    erase: false
+
+  tasks:
+
+  - name: Retrieve network element configuration
+    include_role:
+      public: yes
+      name: ansible-network.config_manager
+      tasks_from: get
+
+  - name: print out configuration
+    debug:
+      var: configuration
