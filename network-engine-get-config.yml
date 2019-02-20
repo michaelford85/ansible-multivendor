@@ -24,10 +24,10 @@
       copy:
         dest: "./configs/{{ inventory_hostname }}.cfg"
         content: "{{ configuration }}"
-    when: not erase
+    when: not erase | bool
 
   - name: Delete configuration files
     file:
       path: "./configs/{{ inventory_hostname }}.cfg"
       state: absent
-    when: erase
+    when: erase | bool
