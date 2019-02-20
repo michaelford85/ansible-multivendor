@@ -1,0 +1,6 @@
+#Install network-engine from galaxy
+- src: ansible-network.network-engine
+- src: ansible-network.config_manager
+- src: ansible-network.cisco_ios
+- src: ansible-network.cisco_nxos
+- src: ansible-network.juniper_junos
