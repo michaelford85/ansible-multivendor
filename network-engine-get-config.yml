@@ -18,3 +18,8 @@
   - name: print out configuration
     debug:
       var: configuration
+
+  - name: Place configurations into file
+    copy:
+      dest: "./configs/{{ inventory_hostname }}.cfg"
+      content: configuration
