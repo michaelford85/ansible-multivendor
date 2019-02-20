@@ -22,4 +22,4 @@
   - name: Place configurations into file
     copy:
       dest: "./configs/{{ inventory_hostname }}.cfg"
-      content: configuration
+      content: "{{ configuration }}"
